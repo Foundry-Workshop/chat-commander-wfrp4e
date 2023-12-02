@@ -1,0 +1,30 @@
+#autocomplete-menu {
+  #context-menu {
+    span {
+      &.tag {
+        padding: 3px 8px;
+        border-radius: 4px;
+        margin-right: 4px;
+        background-color: #444;
+        font-size: 12px;
+        font-variant: small-caps;
+
+        &.green {
+          background-color: #262;
+        }
+        &.yellow {
+          background-color: #960;
+        }
+        &.red {
+          background-color: #622;
+        }
+        &.blue {
+          background-color: #336;
+        }
+        &.grey {
+          background-color: #888;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "id": "chat-commander-wfrp4e",
+  "title": "Chat Commander — WFRP4e",
+  "description": "",
+  "authors": [
+    {
+      "name": "Forien",
+      "discord": "forien",
+      "url": "https://www.patreon.com/foundryworkshop"
+    }
+  ],
+  "url": "<<autoreplaced>>",
+  "manifest": "<<autoreplaced>>",
+  "download": "<<autoreplaced>>",
+  "readme": "<<autoreplaced>>",
+  "changelog": "<<autoreplaced>>",
+  "bugs": "<<autoreplaced>>",
+  "version": "<<autoreplaced>>",
+  "compatibility": {
+    "minimum": "11",
+    "verified": "11.307"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "wfrp4e",
+        "type": "system",
+        "compatibility": [
+          {
+            "minimum": "7.0.3",
+            "verified": "7.0.3"
+          }
+        ]
+      }
+    ],
+    "requires": [
+      {
+        "id": "_chatcommands",
+        "type": "module"
+      }
+    ]
+  },
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "languages/en.json"
+    }
+  ],
+  "esmodules": [
+    "./modules/chat-commander-wfrp4e.mjs"
+  ],
+  "styles": [
+    "./styles/chat-commander-wfrp4e.css"
+  ],
+  "flags": {
+    "hotReload": {
+      "extensions": [
+        "css",
+        "html",
+        "hbs",
+        "json"
+      ],
+      "paths": [
+        "templates/",
+        "styles/",
+        "languages/"
+      ]
+    }
+  },
+  "socket": true
+}

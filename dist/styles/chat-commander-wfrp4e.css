@@ -1,0 +1,25 @@
+#autocomplete-menu #context-menu span.tag {
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-right: 4px;
+  background-color: #444;
+  font-size: 12px;
+  font-variant: small-caps;
+}
+#autocomplete-menu #context-menu span.tag.green {
+  background-color: #262;
+}
+#autocomplete-menu #context-menu span.tag.yellow {
+  background-color: #960;
+}
+#autocomplete-menu #context-menu span.tag.red {
+  background-color: #622;
+}
+#autocomplete-menu #context-menu span.tag.blue {
+  background-color: #336;
+}
+#autocomplete-menu #context-menu span.tag.grey {
+  background-color: #888;
+}
+
+/*# sourceMappingURL=chat-commander-wfrp4e.css.map */

@@ -1,0 +1,79 @@
+{
+  "Forien": {
+    "ChatCommanderWFRP4e": {
+      "Commands": {
+        "TableDescription": "Select a system RollTable to roll for",
+        "TableHint": "Syntax: <span class='parameter'>key</span> <span class='parameter'>[column]</span> <span class='parameter'>[modifier]</span>",
+        "TableHelp": "Show all tables as clickable links in chat.",
+        "TableModExample": "Example modifier: <strong>{mod}</strong>",
+
+        "ConditionsDescription": "Post Condition's description to Chat",
+        "ConditionsHint": "Syntax: <span class='parameter'>key</span>",
+
+        "PropertiesDescription": "Post Item Property's description to Chat",
+        "PropertiesHint": "Syntax: <span class='parameter'>key</span>",
+
+        "CharGenDescription": "Enter Character Creation.",
+
+        "NameGenDescription": "Enter Character Creation.",
+        "NameGenHint": "Syntax: <span class='parameter'>species</span> <span class='parameter'>[gender]</span>",
+
+        "AvailabilityDescription": "Roll for an item availability based on settlement and rarity.",
+        "AvailabilityHint": "Syntax: <span class='parameter'>settlement</span> <span class='parameter'>rarity</span>",
+
+        "PlayerPayDescription": "Pay specified amount of money from your character's inventory.",
+        "PlayerPayAmountHint": "Syntax: <span class='parameter'>amount</span>",
+        "AmountExample": "Example amounts:",
+
+        "GMPayDescription": "Handle displaying \"pay\" chat card or automatic payment.",
+        "GMPayAmountHint": "Syntax: <span class='parameter'>amount</span> — displays \"Pay\" chat card for all users",
+        "GMPayPlayerHint": "Syntax: <span class='parameter'>amount</span> <span class='parameter'>player</span> — displays \"Pay\" chat card only for specified player",
+        "GMPayActorHint": "Syntax: <span class='parameter'>amount</span> <span class='parameter'>actor</span> — automatically deducts <code>amount</code> from specified actor",
+
+        "CreditDescription": "Handle giving money to the players.",
+        "CreditAmountHint": "Syntax: <span class='parameter'>amount</span> — displays a chat card for all users that allows them to receive a share of money",
+        "CreditPlayerHint": "Syntax: <span class='parameter'>amount</span> <span class='parameter'>player</span> — displays chat card only for specified player",
+        "CreditActorHint": "Syntax: <span class='parameter'>amount</span> <span class='parameter'>actor</span> — automatically awards <code>amount</code> of money to the specified actor",
+        "Each": "Each — every user will be able to receive the specified <code>amount</code>",
+        "Split": "Split — (default) the specified <code>amount</code> will be split between all online users",
+
+        "CorruptionDescription": "Prompt all the players to roll against Corrupting Influences of specified strength.",
+        "CorruptionHint": "Syntax: <span class='parameter'>strength</span>",
+        "CorruptionMinor": "Minor — failing will award player's characters 1 point of Corruption.",
+        "CorruptionModerate": "Moderate — failing will award player's characters 2 point of Corruption.",
+        "CorruptionMajor": "Major — failing will award player's characters 3 points of Corruption.",
+
+        "FearDescription": "Prompt players to perform a Fear check",
+        "FearHint": "Syntax: <span class='parameter'>strength</span> <span class='parameter'>[source]</span>",
+        "FearStrengthExample": "Example strength: <strong>{strength}</strong>",
+
+        "TerrorDescription": "Prompt players to perform a Terror check",
+        "TerrorHint": "Syntax: <span class='parameter'>strength</span> <span class='parameter'>[source]</span>",
+        "TerrorStrengthExample": "Example strength: <strong>{strength}</strong>",
+
+        "TravelDescription": "Show a distance and travel time between two locations",
+        "TravelHint": "Syntax: <span class='parameter'>from</span> <span class='parameter'>to</span>",
+        "TravelHelp": "Show all locations as clickable links in chat.",
+
+        "ExpDescription": "Post a chat card that lets players receive Experience",
+        "ExpHint": "Syntax: <span class='parameter'>experience</span> <span class='parameter'>[reason]</span>",
+        "ExpExample": "Example experience: <strong>{exp}</strong>"
+      },
+
+      "Tags": {
+        "Item": "Item",
+        "Weapon": "Weapon",
+        "Armour": "Armour",
+        "Quality": "Quality",
+        "Flaw": "Flaw",
+        "User": "User",
+        "Actor": "Actor"
+      },
+
+      "NameGen": {
+        "Female": "Female",
+        "Male": "Male"
+      }
+    }
+  }
+}
