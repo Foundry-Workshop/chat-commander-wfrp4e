@@ -1,5 +1,6 @@
 import Utility from "./utility/Utility.mjs";
 import ChatCommandsHelper from "./ChatCommandsHelper.mjs";
+import {constants} from "./constants.mjs";
 
 export default class ChatCommands {
   static register() {
@@ -10,7 +11,7 @@ export default class ChatCommands {
   }
 
   static get installed() {
-    return game.modules.get('_chatcommands')?.active === true;
+    return game.modules.get(constants.chatCommanderCoreId)?.active === true;
   }
 
   static registerCommands() {
@@ -63,7 +64,7 @@ export default class ChatCommands {
 
         entries.push(...[
           game.chatCommands.createInfoElement(game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.TableHint')),
-          game.chatCommands.createCommandElement(`/table`, game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.TableHelp')),
+          game.chatCommands.createCommandElement(`${alias}`, game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.TableHelp')),
           game.chatCommands.createSeparatorElement(),
         ]);
 
@@ -71,14 +72,14 @@ export default class ChatCommands {
           case 1:
             keys = tables.map(t => t.key).filter(Utility.onlyUnique).filter(k => k.includes(params[0]))
             for (const key of keys) {
-              entries.push(game.chatCommands.createCommandElement(`/table ${key} `, key));
+              entries.push(game.chatCommands.createCommandElement(`${alias} ${key} `, key));
             }
             break;
           case 2:
             keys = tables.filter(t => t.key === params[0]).map(t => t.column).filter(k => k && k.includes(params[1]))
             if (keys && keys.length) {
               for (const key of keys) {
-                entries.push(game.chatCommands.createCommandElement(`/table ${params[0]} ${key} `, key));
+                entries.push(game.chatCommands.createCommandElement(`${alias} ${params[0]} ${key} `, key));
               }
               break;
             }
@@ -89,7 +90,7 @@ export default class ChatCommands {
               if (mod === 0) continue;
               let modString = (mod > 0) ? `+${mod}` : mod;
               parameters = [params[0], params[1]].filter(e => e).join(" ");
-              entries.push(game.chatCommands.createCommandElement(`/table ${parameters} ${modString} `, game.i18n.format('Forien.ChatCommanderWFRP4e.Commands.TableModExample', {mod: modString})));
+              entries.push(game.chatCommands.createCommandElement(`${alias} ${parameters} ${modString} `, game.i18n.format('Forien.ChatCommanderWFRP4e.Commands.TableModExample', {mod: modString})));
             }
             break;
           default:
@@ -119,7 +120,7 @@ export default class ChatCommands {
         ]);
 
         for (const key of Object.keys(conditions).filter(c => c.includes(parameters))) {
-          entries.push(game.chatCommands.createCommandElement(`/cond ${key} `, game.wfrp4e.config.conditions[key]));
+          entries.push(game.chatCommands.createCommandElement(`${alias} ${key} `, game.wfrp4e.config.conditions[key]));
         }
 
         return entries;
@@ -145,7 +146,7 @@ export default class ChatCommands {
         ]);
 
         for (const prop of props.filter(p => p.key.includes(parameters))) {
-          entries.push(game.chatCommands.createCommandElement(`/prop ${prop.key} `, prop.description));
+          entries.push(game.chatCommands.createCommandElement(`${alias} ${prop.key} `, prop.description));
         }
 
         return entries;
@@ -182,17 +183,17 @@ export default class ChatCommands {
         switch (params.length) {
           case 1:
             entries.push(...[
-              game.chatCommands.createCommandElement(`/name human `, game.i18n.localize('Human')),
-              game.chatCommands.createCommandElement(`/name dwarf `, game.i18n.localize('Dwarf')),
-              game.chatCommands.createCommandElement(`/name helf `, game.i18n.localize('High Elf')),
-              game.chatCommands.createCommandElement(`/name welf `, game.i18n.localize('Wood Elf')),
-              game.chatCommands.createCommandElement(`/name halfling `, game.i18n.localize('Halfling'))
+              game.chatCommands.createCommandElement(`${alias} human `, game.i18n.localize('Human')),
+              game.chatCommands.createCommandElement(`${alias} dwarf `, game.i18n.localize('Dwarf')),
+              game.chatCommands.createCommandElement(`${alias} helf `, game.i18n.localize('High Elf')),
+              game.chatCommands.createCommandElement(`${alias} welf `, game.i18n.localize('Wood Elf')),
+              game.chatCommands.createCommandElement(`${alias} halfling `, game.i18n.localize('Halfling'))
             ]);
             break;
           case 2:
             entries.push(...[
-              game.chatCommands.createCommandElement(`/name ${params[0]} female `, game.i18n.localize('Forien.ChatCommanderWFRP4e.NameGen.Female')),
-              game.chatCommands.createCommandElement(`/name ${params[0]} male `, game.i18n.localize('Forien.ChatCommanderWFRP4e.NameGen.Male'))
+              game.chatCommands.createCommandElement(`${alias} ${params[0]} female `, game.i18n.localize('Forien.ChatCommanderWFRP4e.NameGen.Female')),
+              game.chatCommands.createCommandElement(`${alias} ${params[0]} male `, game.i18n.localize('Forien.ChatCommanderWFRP4e.NameGen.Male'))
             ]);
             break;
           default:
@@ -223,12 +224,12 @@ export default class ChatCommands {
         switch (params.length) {
           case 1:
             for (const settlement of ChatCommandsHelper.settlements) {
-              entries.push(game.chatCommands.createCommandElement(`/avail ${settlement} `, settlement.capitalize()))
+              entries.push(game.chatCommands.createCommandElement(`${alias} ${settlement} `, settlement.capitalize()))
             }
             break;
           case 2:
             for (const rarity of ChatCommandsHelper.rarities) {
-              entries.push(game.chatCommands.createCommandElement(`/avail ${params[0]} ${rarity} `, rarity.capitalize()))
+              entries.push(game.chatCommands.createCommandElement(`${alias} ${params[0]} ${rarity} `, rarity.capitalize()))
             }
             break;
           default:
@@ -296,11 +297,7 @@ export default class ChatCommands {
             ])
             break;
           case 2:
-            const hints = [...ChatCommandsHelper.onlinePlayers, ...ChatCommandsHelper.actors];
-            for (const hint of hints.filter(h => h.name.toLowerCase().includes(params[1]))) {
-              let tag = hint instanceof Actor ? ChatCommandsHelper.actorTag : ChatCommandsHelper.userTag;
-              entries.push(game.chatCommands.createCommandElement(`/pay ${params[0]} ${hint.name.toLowerCase()} `, `${hint.name} — ${ChatCommandsHelper.parseTagToHTML(tag)}`));
-            }
+            ChatCommandsHelper.createPlayersAndActorsHint(params, entries, alias);
             break;
           default:
             return false;
@@ -342,15 +339,11 @@ export default class ChatCommands {
             break;
           case 2:
             if ('split'.includes(params[1]))
-              entries.push(game.chatCommands.createCommandElement(`/credit ${params[0]} split `, game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.Split')));
+              entries.push(game.chatCommands.createCommandElement(`${alias} ${params[0]} split `, game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.Split')));
             if ('each'.includes(params[1]))
-              entries.push(game.chatCommands.createCommandElement(`/credit ${params[0]} each `, game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.Each')));
+              entries.push(game.chatCommands.createCommandElement(`${alias} ${params[0]} each `, game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.Each')));
 
-            const hints = [...ChatCommandsHelper.onlinePlayers, ...ChatCommandsHelper.actors];
-            for (const hint of hints.filter(h => h.name.toLowerCase().includes(params[1]))) {
-              let tag = hint instanceof Actor ? ChatCommandsHelper.actorTag : ChatCommandsHelper.userTag;
-              entries.push(game.chatCommands.createCommandElement(`/credit ${params[0]} ${hint.name.toLowerCase()} `, `${hint.name} — ${ChatCommandsHelper.parseTagToHTML(tag)}`));
-            }
+            ChatCommandsHelper.createPlayersAndActorsHint(params, entries, alias);
             break;
           default:
             return false;
@@ -368,15 +361,15 @@ export default class ChatCommands {
       icon: "<i class='fas fa-viruses'></i>",
       description: game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.CorruptionDescription'),
       closeOnComplete: true,
-      autocompleteCallback: () => {
+      autocompleteCallback: (_menu, alias) => {
         const entries = [];
 
         entries.push(...[
           game.chatCommands.createInfoElement(game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.CorruptionHint')),
           game.chatCommands.createSeparatorElement(),
-          game.chatCommands.createCommandElement(`/corruption minor`, game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.CorruptionMinor')),
-          game.chatCommands.createCommandElement(`/corruption moderate`, game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.CorruptionModerate')),
-          game.chatCommands.createCommandElement(`/corruption major`, game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.CorruptionMajor')),
+          game.chatCommands.createCommandElement(`${alias} minor`, game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.CorruptionMinor')),
+          game.chatCommands.createCommandElement(`${alias} moderate`, game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.CorruptionModerate')),
+          game.chatCommands.createCommandElement(`${alias} major`, game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.CorruptionMajor')),
         ]);
 
         return entries;
@@ -403,7 +396,7 @@ export default class ChatCommands {
         switch (params.length) {
           case 1:
             for (let strength = 1; strength < 6; strength += 1) {
-              entries.push(game.chatCommands.createCommandElement(`/fear ${strength} `, game.i18n.format('Forien.ChatCommanderWFRP4e.Commands.FearStrengthExample', {strength})));
+              entries.push(game.chatCommands.createCommandElement(`${alias} ${strength} `, game.i18n.format('Forien.ChatCommanderWFRP4e.Commands.FearStrengthExample', {strength})));
             }
             break;
           case 2:
@@ -436,7 +429,7 @@ export default class ChatCommands {
         switch (params.length) {
           case 1:
             for (let strength = 1; strength < 6; strength += 1) {
-              entries.push(game.chatCommands.createCommandElement(`/terror ${strength} `, game.i18n.format('Forien.ChatCommanderWFRP4e.Commands.TerrorStrengthExample', {strength})));
+              entries.push(game.chatCommands.createCommandElement(`${alias} ${strength} `, game.i18n.format('Forien.ChatCommanderWFRP4e.Commands.TerrorStrengthExample', {strength})));
             }
             break;
           case 2:
@@ -476,14 +469,14 @@ export default class ChatCommands {
           case 1:
             locations = travelData.map(t => t.from).filter(Utility.onlyUnique).filter(t => t.includes(params[0]))
             for (const location of locations) {
-              entries.push(game.chatCommands.createCommandElement(`/travel ${location} `, location.capitalize()));
+              entries.push(game.chatCommands.createCommandElement(`${alias} ${location} `, location.capitalize()));
             }
             break;
           case 2:
             locations = travelData.filter(t => t.from === params[0]).map(t => t.to).filter(t => t && t.includes(params[1]))
             if (locations && locations.length) {
               for (const location of locations) {
-                entries.push(game.chatCommands.createCommandElement(`/travel ${params[0]} ${location} `, location.capitalize()));
+                entries.push(game.chatCommands.createCommandElement(`${alias} ${params[0]} ${location} `, location.capitalize()));
               }
             }
             break;
@@ -515,7 +508,7 @@ export default class ChatCommands {
         switch (params.length) {
           case 1:
             for (let exp = 25; exp <= 150; exp += 25) {
-              entries.push(game.chatCommands.createCommandElement(`/exp ${exp} `, game.i18n.format('Forien.ChatCommanderWFRP4e.Commands.ExpExample', {exp})));
+              entries.push(game.chatCommands.createCommandElement(`${alias} ${exp} `, game.i18n.format('Forien.ChatCommanderWFRP4e.Commands.ExpExample', {exp})));
             }
             break;
           case 2:

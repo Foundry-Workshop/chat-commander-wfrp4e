@@ -162,4 +162,12 @@ export default class ChatCommandsHelper {
   }
 
   //#endregion
+
+  static createPlayersAndActorsHint(params, entries, alias) {
+    const hints = [...ChatCommandsHelper.onlinePlayers, ...ChatCommandsHelper.actors];
+    for (const hint of hints.filter(h => h.name.toLowerCase().includes(params[1]))) {
+      let tag = hint instanceof Actor ? ChatCommandsHelper.actorTag : ChatCommandsHelper.userTag;
+      entries.push(game.chatCommands.createCommandElement(`${alias} ${params[0]} ${hint.name.toLowerCase()} `, `${hint.name} — ${ChatCommandsHelper.parseTagToHTML(tag)}`));
+    }
+  }
 }

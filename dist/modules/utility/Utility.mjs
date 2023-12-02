@@ -37,10 +37,6 @@ export default class Utility {
     });
   }
 
-  static getPlayersCreateSetting() {
-    return game.settings.get(constants.moduleId, settings.playersCreate);
-  }
-
   static onlyUnique(value, index, array) {
     return array.indexOf(value) === index;
   }
