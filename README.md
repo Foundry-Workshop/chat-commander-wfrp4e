@@ -1,4 +1,4 @@
-# FoundryVTT - Forien's Armoury
+# FoundryVTT - Chat Commander – WFRP4e
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/Foundry-Workshop/chat-commander-wfrp4e?style=for-the-badge)
 ![Foundry Core Compatible Version](https://img.shields.io/badge/dynamic/json.svg?url=https%3A%2F%2Fraw.githubusercontent.com%2FFoundry-Workshop%2Fchat-commander-wfrp4e%2Fmaster%2Fmodule.json&label=Foundry%20Min%20Version&query=$.compatibility.minimum&colorB=orange&style=for-the-badge)
 ![Foundry Core Compatible Version](https://img.shields.io/badge/dynamic/json.svg?url=https%3A%2F%2Fraw.githubusercontent.com%2FFoundry-Workshop%2Fchat-commander-wfrp4e%2Fmaster%2Fmodule.json&label=Foundry%20Verified&query=$.compatibility.verified&colorB=orange&style=for-the-badge)  
