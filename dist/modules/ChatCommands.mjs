@@ -60,7 +60,7 @@ export default class ChatCommands {
   }
 
   static registerTableCommand() {
-    const tables = game.tables.map(a => a.flags.wfrp4e).filter(t => t.key);
+    const tables = game.tables.map(a => a.flags?.wfrp4e).filter(t => t?.key);
 
     game.chatCommands.register({
       name: "/table",
