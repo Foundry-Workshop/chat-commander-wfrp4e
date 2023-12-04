@@ -25,7 +25,7 @@ To make use of this module, simply start your chat messages by typing `/`. You c
 
 This module supports the following commands:
 
-`/table`, `/cond`, `/prop`, `/char`, `/name`, `/avail`, `/pay`, `/credit`, `/corruption`, `/fear`, `/terror`, `/travel`, `/exp`
+`/table`, `/cond`, `/prop`, `/char`, `/name`, `/avail`, `/pay`, `/credit`, `/corruption`, `/fear`, `/terror`, `/travel`, `/exp` and `/trade`
 
 
 ## Future plans
