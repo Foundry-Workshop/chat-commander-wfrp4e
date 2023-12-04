@@ -57,7 +57,9 @@
 
         "ExpDescription": "Post a chat card that lets players receive Experience",
         "ExpHint": "Syntax: <span class='parameter'>experience</span> <span class='parameter'>[reason]</span>",
-        "ExpExample": "Example experience: <strong>{exp}</strong>"
+        "ExpExample": "Example experience: <strong>{exp}</strong>",
+
+        "TradeDescription": "Open the \"Death on the Reik\" Trade dialog"
       },
 
       "Tags": {

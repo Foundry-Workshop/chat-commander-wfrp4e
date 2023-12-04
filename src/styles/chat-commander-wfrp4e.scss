@@ -28,3 +28,16 @@
     }
   }
 }
+
+#chat-form textarea {
+  border: 3px double #ffffff00;
+
+  &#chat-message {
+    border: 3px double #3e000078;
+  }
+
+  &#autocomplete-suggestion {
+    width: calc(100% - 22px);
+    box-sizing: border-box;
+  }
+}

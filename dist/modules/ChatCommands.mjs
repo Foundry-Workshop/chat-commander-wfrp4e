@@ -5,13 +5,16 @@ import {constants} from "./constants.mjs";
 export default class ChatCommands {
   static register() {
     if (ChatCommands.installed) {
-      if (game.user.isGM || Utility.getPlayersCreateSetting())
-        ChatCommands.registerCommands();
+      ChatCommands.registerCommands();
     }
   }
 
   static get installed() {
     return game.modules.get(constants.chatCommanderCoreId)?.active === true;
+  }
+
+  static get installedDotR() {
+    return game.modules.get(constants.dotrId)?.active === true;
   }
 
   static registerCommands() {
@@ -35,6 +38,10 @@ export default class ChatCommands {
     ChatCommands.registerTerrorCommand();
     ChatCommands.registerTravelCommand();
     ChatCommands.registerEXPCommand();
+
+    if (ChatCommands.installedDotR) {
+      ChatCommands.registerTradeCommand();
+    }
   }
 
   static registerPlayerCommands() {
@@ -46,6 +53,10 @@ export default class ChatCommands {
     ChatCommands.registerAvailabilityCommand();
     ChatCommands.registerPlayerPayCommand();
     ChatCommands.registerTravelCommand();
+
+    if (ChatCommands.installedDotR) {
+      ChatCommands.registerTradeCommand();
+    }
   }
 
   static registerTableCommand() {
@@ -519,6 +530,16 @@ export default class ChatCommands {
 
         return entries;
       }
+    });
+  }
+
+  static registerTradeCommand() {
+    game.chatCommands.register({
+      name: "/trade",
+      module: "wfrp4e",
+      icon: "<i class='fas fa-cash-register'></i>",
+      description: game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.TradeDescription'),
+      closeOnComplete: true
     });
   }
 }
