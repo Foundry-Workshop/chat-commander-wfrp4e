@@ -52,7 +52,7 @@ export default class ChatCommands {
     ChatCommands.registerNameGenCommand();
     ChatCommands.registerAvailabilityCommand();
     ChatCommands.registerPlayerPayCommand();
-    ChatCommands.registerTravelCommand();
+    // ChatCommands.registerTravelCommand();
 
     if (ChatCommands.installedDotR) {
       ChatCommands.registerTradeCommand();
