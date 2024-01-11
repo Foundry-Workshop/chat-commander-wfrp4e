@@ -27,8 +27,8 @@
 
         "GMPayDescription": "Pozwala graczom na zapłacenie określonej kwoty lub automatycznie dokonuje transakcji.",
         "GMPayAmountHint": "Składnia: <span class='parameter'>ilość</span> — wyświetla wiadomość pozwalającą na zapłatę dla wszystkich graczy",
-        "GMPayPlayerHint": "Składnia: <span class='parameter'>ilość</span> <span class='parameter'>player</span> — wyświetla wiadomość o zapłacie tylko dla jednego gracza",
-        "GMPayActorHint": "Składnia: <span class='parameter'>ilość</span> <span class='parameter'>actor</span> — automatycznie płaci postaci określoną <code>ilość</code> pieniędzy",
+        "GMPayPlayerHint": "Składnia: <span class='parameter'>ilość</span> <span class='parameter'>gracz</span> — wyświetla wiadomość o zapłacie tylko dla jednego gracza",
+        "GMPayActorHint": "Składnia: <span class='parameter'>ilość</span> <span class='parameter'>postać</span> — automatycznie odejmuje określoną <code>ilość</code> pieniędzy z ekwipunku postaci",
 
         "CreditDescription": "Pozwala na przyznawanie pieniędzy graczom.",
         "CreditAmountHint": "Składnia: <span class='parameter'>ilość</span> — wyświetla wiadomość pozwalającą na otrzymanie pieniędzy dla wszystkich graczy",
@@ -56,14 +56,14 @@
         "TravelHelp": "Pokaż wszystkie miejsca jako interaktywne linki.",
 
         "ExpDescription": "Pozwala graczom odebrać Punkty Doświadczenia.",
-        "ExpHint": "Składnia: <span class='parameter'>experience</span> <span class='parameter'>[powód]</span>",
+        "ExpHint": "Składnia: <span class='parameter'>doświadczenie</span> <span class='parameter'>[powód]</span>",
         "ExpExample": "Przykład: <strong>{exp}</strong>",
 
-        "TradeDescription": "Otwórz okno do handlu z \"Śmierci na Rzece Reik\"."
+        "TradeDescription": "Otwórz okno do handlu ze \"Śmierci na Rzece Reik\"."
       },
 
       "Tags": {
-        "Item": "Przebiot",
+        "Item": "Przedmiot",
         "Weapon": "Broń",
         "Armour": "Pancerz",
         "Quality": "Zaleta",
