@@ -130,8 +130,8 @@ export default class ChatCommands {
           game.chatCommands.createSeparatorElement(),
         ]);
 
-        for (const key of Object.keys(conditions).filter(c => c.includes(parameters))) {
-          entries.push(game.chatCommands.createCommandElement(`${alias} ${key} `, game.wfrp4e.config.conditions[key]));
+        for (const value of Object.values(conditions).filter(c => c.toLocaleLowerCase().includes(parameters))) {
+          entries.push(game.chatCommands.createCommandElement(`${alias} ${value.toLocaleLowerCase().replaceAll(" ", "_")} `, value));
         }
 
         return entries;
@@ -156,8 +156,8 @@ export default class ChatCommands {
           game.chatCommands.createSeparatorElement(),
         ]);
 
-        for (const prop of props.filter(p => p.key.includes(parameters))) {
-          entries.push(game.chatCommands.createCommandElement(`${alias} ${prop.key} `, prop.description));
+        for (const prop of props.filter(p => p.value.toLocaleLowerCase().includes(parameters))) {
+          entries.push(game.chatCommands.createCommandElement(`${alias} ${prop.value.toLocaleLowerCase().replaceAll(" ", "_")} `, prop.description));
         }
 
         return entries;
