@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.1.4
+* Added Polish localization thanks to @Robak132
+* Fix for localized properties and conditions (thanks to @Robak132)
+
 ## v0.1.3
 * Removed `/travel` command for players, which caused bug making `/trade` command inaccessible for them.
 

@@ -48,6 +48,7 @@ If you wish to contact me for any reason, reach me out on Discord using my tag: 
 ## Acknowledgments
 
 * Thanks to DJ Addi for creating Chat Commander module!
+* Thanks to Robak for contributing Polish translations!
 
 ## Support
 
