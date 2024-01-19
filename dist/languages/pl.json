@@ -1,0 +1,81 @@
+{
+  "Forien": {
+    "ChatCommanderWFRP4e": {
+      "Commands": {
+        "TableDescription": "Wybierz tablicę, z której chcesz wykonać rzut",
+        "TableHint": "Składnia: <span class='parameter'>klucz</span> <span class='parameter'>[kolumna]</span> <span class='parameter'>[modyfikator]</span>",
+        "TableHelp": "Pokaż wszystkie tablice jako interaktywne linki.",
+        "TableModExample": "Przykładowy modyfikator: <strong>{mod}</strong>",
+
+        "ConditionsDescription": "Wyślij opis Stanu na czat.",
+        "ConditionsHint": "Składnia: <span class='parameter'>nazwa</span>",
+
+        "PropertiesDescription": "Wyślij opis Zalety lub Wady przedmiotu na czat.",
+        "PropertiesHint": "Składnia: <span class='parameter'>nazwa</span>",
+
+        "CharGenDescription": "Otwórz Generator Postaci.",
+
+        "NameGenDescription": "Wygeneruj imię Postaci.",
+        "NameGenHint": "Składnia: <span class='parameter'>rasa</span> <span class='parameter'>[płeć]</span>",
+
+        "AvailabilityDescription": "Rzuć na Dostępność przedmiotu na podstawie wielkości osady i rzadkości.",
+        "AvailabilityHint": "Składnia: <span class='parameter'>osada</span> <span class='parameter'>dostępność</span>",
+
+        "PlayerPayDescription": "Zapłać określoną ilość pieniędzy z ekwipunku swojego Bohatera.",
+        "PlayerPayAmountHint": "Składnia: <span class='parameter'>ilość</span>",
+        "AmountExample": "Przykładowe ilości:",
+
+        "GMPayDescription": "Pozwala graczom na zapłacenie określonej kwoty lub automatycznie dokonuje transakcji.",
+        "GMPayAmountHint": "Składnia: <span class='parameter'>ilość</span> — wyświetla wiadomość pozwalającą na zapłatę dla wszystkich graczy",
+        "GMPayPlayerHint": "Składnia: <span class='parameter'>ilość</span> <span class='parameter'>gracz</span> — wyświetla wiadomość o zapłacie tylko dla jednego gracza",
+        "GMPayActorHint": "Składnia: <span class='parameter'>ilość</span> <span class='parameter'>postać</span> — automatycznie odejmuje określoną <code>ilość</code> pieniędzy z ekwipunku postaci",
+
+        "CreditDescription": "Pozwala na przyznawanie pieniędzy graczom.",
+        "CreditAmountHint": "Składnia: <span class='parameter'>ilość</span> — wyświetla wiadomość pozwalającą na otrzymanie pieniędzy dla wszystkich graczy",
+        "CreditPlayerHint": "Składnia: <span class='parameter'>ilość</span> <span class='parameter'>player</span> — wyświetla wiadomość pozwalającą na otrzymanie pieniędzy tylko dla jednego gracza",
+        "CreditActorHint": "Składnia: <span class='parameter'>ilość</span> <span class='parameter'>actor</span> — automatycznie przyznaje postaci określoną <code>ilość</code> pieniędzy",
+        "Each": "\"Each\" — każdy gracz będzie mógł otrzymać określoną <code>ilość</code> pieniędzy",
+        "Split": "\"Split\" — (tryb domyślny) określona <code>ilość</code> pieniędzy zostanie podzielona pomiędzy wszystkich graczy, którzy są online",
+
+        "CorruptionDescription": "Pozwala graczom na przeprowadzenie testu przeciwko Źródłu Zepsucia o określonej sile.",
+        "CorruptionHint": "Składnia: <span class='parameter'>siła</span>",
+        "CorruptionMinor": "Pomniejsze — porażka poskutkuje otrzymaniem 1 punktu Zepsucia.",
+        "CorruptionModerate": "Umiarkowane — porażka poskutkuje otrzymaniem 2 punktów Zepsucia.",
+        "CorruptionMajor": "Potężne — porażka poskutkuje otrzymaniem 3 punktów Zepsucia.",
+
+        "FearDescription": "Pozwala graczom na przeprowadzenie testu Strachu.",
+        "FearHint": "Składnia: <span class='parameter'>siła</span> <span class='parameter'>[źródło]</span>",
+        "FearStrengthExample": "Przykładowa siła: <strong>{strength}</strong>",
+
+        "TerrorDescription": "Pozwala graczom na przeprowadzenie testu Grozy.",
+        "TerrorHint": "Składnia: <span class='parameter'>siła</span> <span class='parameter'>[źródło]</span>",
+        "TerrorStrengthExample": "Przykładowa siła: <strong>{strength}</strong>",
+
+        "TravelDescription": "Pokazuje dystans i czas podróży pomiędzy dwoma wybranymi miejscami.",
+        "TravelHint": "Składnia: <span class='parameter'>z</span> <span class='parameter'>do</span>",
+        "TravelHelp": "Pokaż wszystkie miejsca jako interaktywne linki.",
+
+        "ExpDescription": "Pozwala graczom odebrać Punkty Doświadczenia.",
+        "ExpHint": "Składnia: <span class='parameter'>doświadczenie</span> <span class='parameter'>[powód]</span>",
+        "ExpExample": "Przykład: <strong>{exp}</strong>",
+
+        "TradeDescription": "Otwórz okno do handlu ze \"Śmierci na Rzece Reik\"."
+      },
+
+      "Tags": {
+        "Item": "Przedmiot",
+        "Weapon": "Broń",
+        "Armour": "Pancerz",
+        "Quality": "Zaleta",
+        "Flaw": "Wada",
+        "User": "Użytkownik",
+        "Actor": "Aktor"
+      },
+
+      "NameGen": {
+        "Female": "Kobieta",
+        "Male": "Mężczyzna"
+      }
+    }
+  }
+}
