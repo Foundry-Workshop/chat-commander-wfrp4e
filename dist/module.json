@@ -18,7 +18,7 @@
   "version": "<<autoreplaced>>",
   "compatibility": {
     "minimum": "11",
-    "verified": "11.315"
+    "verified": "12.327"
   },
   "relationships": {
     "systems": [
@@ -28,7 +28,7 @@
         "compatibility": [
           {
             "minimum": "7.0.3",
-            "verified": "7.0.3"
+            "verified": "7.2.1"
           }
         ]
       }
