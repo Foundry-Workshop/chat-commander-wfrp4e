@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.1.5
+* Verified for v12.327
+* Added mention of „Sea of Claws” module in `/trade` command
+
 ## v0.1.4
 * Added Polish localization thanks to @Robak132
 * Fix for localized properties and conditions (thanks to @Robak132)
