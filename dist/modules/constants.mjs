@@ -3,7 +3,8 @@ const constants = {
   moduleId: 'chat-commander-wfrp4e',
   moduleLabel: 'Chat Commander — WFRP4e',
   chatCommanderCoreId: '_chatcommands',
-  dotrId: 'wfrp4e-dotr'
+  dotrId: 'wfrp4e-dotr',
+  socId: 'wfrp4e-soc'
 };
 
 const defaults = {}

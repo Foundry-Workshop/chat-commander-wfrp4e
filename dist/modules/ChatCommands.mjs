@@ -13,6 +13,14 @@ export default class ChatCommands {
     return game.modules.get(constants.chatCommanderCoreId)?.active === true;
   }
 
+  static get canTrade() {
+    return ChatCommands.installedDotR || ChatCommands.installedSoC;
+  }
+
+  static get installedSoC() {
+    return game.modules.get(constants.socId)?.active === true;
+  }
+
   static get installedDotR() {
     return game.modules.get(constants.dotrId)?.active === true;
   }
@@ -39,7 +47,7 @@ export default class ChatCommands {
     ChatCommands.registerTravelCommand();
     ChatCommands.registerEXPCommand();
 
-    if (ChatCommands.installedDotR) {
+    if (ChatCommands.canTrade) {
       ChatCommands.registerTradeCommand();
     }
   }
@@ -54,7 +62,7 @@ export default class ChatCommands {
     ChatCommands.registerPlayerPayCommand();
     // ChatCommands.registerTravelCommand();
 
-    if (ChatCommands.installedDotR) {
+    if (ChatCommands.canTrade) {
       ChatCommands.registerTradeCommand();
     }
   }

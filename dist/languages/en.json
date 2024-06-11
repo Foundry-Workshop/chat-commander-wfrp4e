@@ -59,7 +59,7 @@
         "ExpHint": "Syntax: <span class='parameter'>experience</span> <span class='parameter'>[reason]</span>",
         "ExpExample": "Example experience: <strong>{exp}</strong>",
 
-        "TradeDescription": "Open the \"Death on the Reik\" Trade dialog"
+        "TradeDescription": "Open the Trade dialog using \"Death on the Reik\" or \"Sea of Claws\" trade rules"
       },
 
       "Tags": {
