@@ -5,6 +5,7 @@
 * Updated the following command autocompletion to match the new WFRP4e's named parameters:
   * `/table`
   * `/name`
+  * `/avail`
 
 ## v0.1.5
 * Verified for v12.327

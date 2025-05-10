@@ -136,15 +136,7 @@ export default class ChatCommands {
             }
             break;
           case "modifier":
-            for (let mod = -30; mod < 40; mod += 10) {
-              if (mod === 0) continue;
-              if (mod === Number(currentValue)) continue;
-              let modString = (mod > 0) ? `+${mod}` : mod;
-              suggestions.push(ChatCommandsHelper.createElement(
-                [alias, params, `${currentArg}=${mod}`],
-                game.i18n.format("Forien.ChatCommanderWFRP4e.Commands.TableModExample", {mod: modString}),
-              ));
-            }
+            suggestions.push(...ChatCommandsHelper.createModifierSuggestions(alias, params, currentArg, currentValue));
             break;
           default:
             return false;
@@ -302,28 +294,56 @@ export default class ChatCommands {
       description: game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.AvailabilityDescription'),
       closeOnComplete: false,
       autocompleteCallback: (menu, alias, parameters) => {
-        const entries = [];
-        const params = parameters.toLocaleLowerCase().split(" ");
+        const {defaultArg, args, currentArg, currentValue} = ChatCommandsHelper.parseParams("avail", parameters);
+        const unusedArguments = [];
+        let params = ChatCommandsHelper.argsToParameters(args);
 
-        entries.push(...[
-          game.chatCommands.createInfoElement(game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.AvailabilityHint')),
-          game.chatCommands.createSeparatorElement(),
-        ]);
+        for (const arg in args) {
+          if (arg === currentArg) continue;
+          if (args[arg] !== null) continue;
 
-        switch (params.length) {
-          case 1:
-            for (const settlement of ChatCommandsHelper.settlements) {
-              entries.push(game.chatCommands.createCommandElement(`${alias} ${settlement} `, settlement.capitalize()))
+          unusedArguments.push(ChatCommandsHelper.createElement(
+            [alias, params, `${arg}=`],
+            game.i18n.localize(`Forien.ChatCommanderWFRP4e.Commands.Availability.${arg}`),
+          ));
+        }
+
+        params = ChatCommandsHelper.argsToParameters(args, currentArg || defaultArg);
+        const suggestions = [];
+
+        switch (currentArg) {
+          case "":
+          case "rarity":
+            if (ChatCommandsHelper.rarities.includes(currentValue)) break;
+            for (const rarity of ChatCommandsHelper.rarities) {
+              suggestions.push(ChatCommandsHelper.createElement([alias, params, `${defaultArg}=${rarity}`], rarity.capitalize()))
             }
             break;
-          case 2:
-            for (const rarity of ChatCommandsHelper.rarities) {
-              entries.push(game.chatCommands.createCommandElement(`${alias} ${params[0]} ${rarity} `, rarity.capitalize()))
+          case "size":
+            if (ChatCommandsHelper.settlements.includes(currentValue)) break;
+            for (const settlement of ChatCommandsHelper.settlements) {
+              suggestions.push(ChatCommandsHelper.createElement(
+                [alias, params, `${currentArg}=${settlement}`],
+                settlement.capitalize(),
+              ));
             }
+            break;
+          case "modifier":
+            suggestions.push(...ChatCommandsHelper.createModifierSuggestions(alias, params, currentArg, currentValue));
             break;
           default:
             return false;
         }
+
+        const entries = [
+          game.chatCommands.createCommandElement(
+            `${alias}`,
+            game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.AvailabilityHelp"),
+          ),
+        ];
+        menu.maxEntries++;
+
+        this._buildAutocompleteSuggestions(menu, entries, suggestions, unusedArguments);
 
         return entries;
       }

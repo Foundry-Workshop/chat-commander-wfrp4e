@@ -47,6 +47,21 @@ export default class ChatCommandsHelper {
     return parameters.substring(lastSpace + 1, lastEquals);
   }
 
+  static createModifierSuggestions(alias, params, currentArg, currentValue) {
+    const suggestions = [];
+
+    for (let mod = -30; mod < 40; mod += 10) {
+      if (mod === 0) continue;
+      if (mod === Number(currentValue)) continue;
+      let modString = (mod > 0) ? `+${mod}` : mod;
+      suggestions.push(ChatCommandsHelper.createElement(
+        [alias, params, `${currentArg}=${mod}`],
+        game.i18n.format("Forien.ChatCommanderWFRP4e.Commands.TableModExample", {mod: modString}),
+      ));
+    }
+
+    return suggestions;
+  }
 
   //#region Register Item Properties Command helpers
 
@@ -153,7 +168,7 @@ export default class ChatCommandsHelper {
   //#region Availability Command helpers
 
   static get settlements() {
-    const settlements = ['MARKET.Village', 'MARKET.Town', 'MARKET.City'];
+    const settlements = Object.keys(game.wfrp4e.config.availabilityTable);
     const settlementsLocalized = [];
 
     settlements.forEach(s =>
@@ -164,19 +179,10 @@ export default class ChatCommandsHelper {
   }
 
   static get rarities() {
-    const rarities = [
-      "WFRP4E.Availability.Common",
-      "WFRP4E.Availability.Exotic",
-      "WFRP4E.Availability.Rare",
-      "WFRP4E.Availability.Scarce"
-    ];
-    const raritiesLocalized = [];
+    const rarities = foundry.utils.duplicate(game.wfrp4e.config.availability);
+    delete rarities.None;
 
-    rarities.forEach(s =>
-      raritiesLocalized.push(game.i18n.localize(s).toLowerCase())
-    );
-
-    return raritiesLocalized;
+    return Object.values(rarities).map(r => r.toLowerCase());
   }
 
   //#endregion

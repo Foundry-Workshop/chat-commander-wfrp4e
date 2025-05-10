@@ -5,7 +5,6 @@
         "Arguments": "Available Arguments",
 
         "TableDescription": "Select a system RollTable to roll for",
-        "TableHint": "Syntax: <span class='parameter'>key</span> <span class='parameter'>[column]</span> <span class='parameter'>[modifier]</span>",
         "TableHelp": "Show all tables as clickable links in chat.",
         "TableModExample": "Example modifier: <strong>{mod}</strong>",
         "Table": {
@@ -29,7 +28,12 @@
         },
 
         "AvailabilityDescription": "Roll for an item availability based on settlement and rarity.",
-        "AvailabilityHint": "Syntax: <span class='parameter'>settlement</span> <span class='parameter'>rarity</span>",
+        "AvailabilityHelp": "Show help for the Availability Test in chat.",
+        "Availability": {
+          "rarity":"<span class='parameter'>rarity</span> — rarity of the item",
+          "size": "<span class='parameter'>size</span> — size of the settlement",
+          "modifier": "<span class='parameter'>modifier</span> — modifier to the roll"
+        },
 
         "PlayerPayDescription": "Pay specified amount of money from your character's inventory.",
         "PlayerPayAmountHint": "Syntax: <span class='parameter'>amount</span>",
