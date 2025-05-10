@@ -141,6 +141,20 @@
         "ExpDescription": "Post a chat card that lets players receive Experience",
         "ExpHint": "Syntax: <span class='parameter'>experience</span> <span class='parameter'>[reason]</span>",
         "ExpExample": "Example experience: <strong>{exp}</strong>",
+        "Exp": {
+          "amount": "<span class='parameter'>amount</span> — amount of XP to award",
+          "reason": "<span class='parameter'>reason</span> — reason for the XP"
+        },
+
+        "ExpExamples": {
+          "Roleplaying": "Good Roleplaying",
+          "AmbitionShort": "Fulfilling short-term Ambition",
+          "SessionPoor": "Playing a session (poor performance)",
+          "SessionGood": "Playing a session (good performance)",
+          "SessionExceptional": "Playing a session (exceptional performance)",
+          "DefeatedBoss": "Defeated the Campaign Nemesis",
+          "example": "+{amount} for {reason}"
+        },
 
         "TradeDescription": "Open the Trade dialog using \"Death on the Reik\" or \"Sea of Claws\" trade rules"
       },

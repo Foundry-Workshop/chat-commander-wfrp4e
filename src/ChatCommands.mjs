@@ -806,25 +806,54 @@ export default class ChatCommands {
       description: game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.ExpDescription'),
       closeOnComplete: false,
       autocompleteCallback: (menu, alias, parameters) => {
-        const params = parameters.toLocaleLowerCase().split(" ");
-        const entries = [];
+        const {defaultArg, args, currentArg, currentValue} = ChatCommandsHelper.parseParams("exp", parameters);
+        const unusedArguments = [];
+        let params = ChatCommandsHelper.argsToParameters(args);
 
-        entries.push(...[
-          game.chatCommands.createInfoElement(game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.ExpHint')),
-          game.chatCommands.createSeparatorElement(),
-        ]);
+        for (const arg in args) {
+          if (arg === currentArg) continue;
+          if (args[arg] !== null) continue;
 
-        switch (params.length) {
-          case 1:
+          unusedArguments.push(ChatCommandsHelper.createElement(
+            [alias, params, `${arg}=`],
+            game.i18n.localize(`Forien.ChatCommanderWFRP4e.Commands.Exp.${arg}`),
+          ));
+        }
+
+        params = ChatCommandsHelper.argsToParameters(args, currentArg || defaultArg);
+        const suggestions = [];
+
+        switch (currentArg) {
+          case "":
+          case "amount":
+            if (Number(currentValue) > 0) break;
             for (let exp = 25; exp <= 150; exp += 25) {
-              entries.push(game.chatCommands.createCommandElement(`${alias} ${exp} `, game.i18n.format('Forien.ChatCommanderWFRP4e.Commands.ExpExample', {exp})));
+              suggestions.push(ChatCommandsHelper.createElement(
+                [alias, params, `${defaultArg}=${exp}`],
+                game.i18n.format("Forien.ChatCommanderWFRP4e.Commands.ExpExample", {exp}),
+              ));
             }
             break;
-          case 2:
+          case "reason":
+            for (const example of ChatCommandsHelper.expReasons)
+              suggestions.push(ChatCommandsHelper.createElement([alias, params, `${currentArg}=${example}`], example));
             break;
           default:
             return false;
         }
+
+        const entries = [];
+
+        if (currentArg === "") {
+          entries.push(
+            game.chatCommands.createInfoElement(game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.ExampleCommands')),
+          )
+          for (const example of ChatCommandsHelper.expExamples) {
+            entries.push(ChatCommandsHelper.createElement([alias, example.params], example.label))
+          }
+        }
+
+        this._buildAutocompleteSuggestions(menu, entries, suggestions, unusedArguments);
 
         return entries;
       }

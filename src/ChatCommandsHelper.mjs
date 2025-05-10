@@ -437,4 +437,72 @@ export default class ChatCommandsHelper {
     ]
   }
   //#endregion
+
+  //#region EXP Helper
+  static get expReasons() {
+    return [
+      game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.ExpExamples.Roleplaying"),
+      game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.ExpExamples.AmbitionShort"),
+      game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.ExpExamples.SessionPoor"),
+      game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.ExpExamples.SessionGood"),
+      game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.ExpExamples.SessionExceptional"),
+      game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.ExpExamples.DefeatedBoss"),
+    ]
+  }
+
+  static get expExamples() {
+    const reasons = ChatCommandsHelper.expReasons;
+
+    return [
+      {
+        params: `amount=10 reason=${reasons[0]}`,
+        label: game.i18n.format("Forien.ChatCommanderWFRP4e.Commands.ExpExamples.example", {
+            amount: 10,
+            reason: reasons[0]
+          },
+        ),
+      },
+      {
+        params: `amount=50 reason=${reasons[1]}`,
+        label: game.i18n.format("Forien.ChatCommanderWFRP4e.Commands.ExpExamples.example", {
+            amount: 50,
+            reason: reasons[1]
+          },
+        ),
+      },
+      {
+        params: `amount=75 reason=${reasons[2]}`,
+        label: game.i18n.format("Forien.ChatCommanderWFRP4e.Commands.ExpExamples.example", {
+            amount: 75,
+            reason: reasons[2]
+          },
+        ),
+      },
+      {
+        params: `amount=100 reason=${reasons[3]}`,
+        label: game.i18n.format("Forien.ChatCommanderWFRP4e.Commands.ExpExamples.example", {
+            amount: 100,
+            reason: reasons[3]
+          },
+        ),
+      },
+      {
+        params: `amount=125 reason=${reasons[4]}`,
+        label: game.i18n.format("Forien.ChatCommanderWFRP4e.Commands.ExpExamples.example", {
+            amount: 125,
+            reason: reasons[4]
+          },
+        ),
+      },
+      {
+        params: `amount=250 reason=${reasons[5]}`,
+        label: game.i18n.format("Forien.ChatCommanderWFRP4e.Commands.ExpExamples.example", {
+            amount: 250,
+            reason: reasons[5]
+          },
+        ),
+      },
+    ]
+  }
+  //#endregion
 }

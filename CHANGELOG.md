@@ -12,6 +12,7 @@
   * `/fear`
   * `/terror`
   * `/travel`
+  * `/exp`
 
 ## v0.1.5
 * Verified for v12.327
