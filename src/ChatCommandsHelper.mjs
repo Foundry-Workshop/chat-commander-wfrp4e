@@ -214,10 +214,15 @@ export default class ChatCommandsHelper {
 
   //#region Pay Command helpers
 
-  static get amountExamples() {
+  static get _currencyLabels() {
     const gc = game.i18n.localize("MARKET.Abbrev.GC").toLowerCase();
     const ss = game.i18n.localize("MARKET.Abbrev.SS").toLowerCase();
     const bp = game.i18n.localize("MARKET.Abbrev.BP").toLowerCase();
+    return {gc, ss, bp};
+  }
+
+  static get amountExamples() {
+    const {gc, ss, bp} = this._currencyLabels;
 
     return [`10${gc}3${ss} 7${bp}`, `3${gc} 2${bp}`, `10${bp}350${ss}`];
   }
@@ -231,9 +236,9 @@ export default class ChatCommandsHelper {
   }
 
   static get payExamples() {
-    const gc = game.i18n.localize("MARKET.Abbrev.GC").toLowerCase();
-    const ss = game.i18n.localize("MARKET.Abbrev.SS").toLowerCase();
-    const bp = game.i18n.localize("MARKET.Abbrev.BP").toLowerCase();
+    const {gc, ss, bp} = this._currencyLabels;
+    const wordFor = game.i18n.localize("Forien.ChatCommanderWFRP4e.for");
+    const wordAnd = game.i18n.localize("Forien.ChatCommanderWFRP4e.and");
 
     const cheapAle = game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.ReasonExamples.CheapAle");
     const roomBoard = game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.ReasonExamples.RoomBoard");
@@ -242,15 +247,37 @@ export default class ChatCommandsHelper {
     return [
       {
         params: `amount=3${bp} for=${cheapAle}`,
-        label: `3${bp} for "${cheapAle}"`,
+        label: `3${bp} ${wordFor} "${cheapAle}"`,
       },
       {
         params: `amount=2${ss} 6${bp} for=${roomBoard}`,
-        label: `2${ss} and 6${bp} for "${roomBoard}"`,
+        label: `2${ss} ${wordAnd} 6${bp} ${wordFor} "${roomBoard}"`,
       },
       {
         params: `amount=10${gc} 15${ss} 8${bp} for=${unfairTax}`,
-        label: `10${gc} 15/8 for "${unfairTax}"`,
+        label: `10${gc} 15/8 ${wordFor} "${unfairTax}"`,
+      }
+    ]
+  }
+
+  static get creditExamples() {
+    const {gc, ss, bp} = this._currencyLabels;
+
+    const wordFor = game.i18n.localize("Forien.ChatCommanderWFRP4e.for");
+    const wordAnd = game.i18n.localize("Forien.ChatCommanderWFRP4e.and");
+    const splitThree = game.i18n.format("Forien.ChatCommanderWFRP4e.split", {count: 3});
+    const each = game.i18n.localize("Forien.ChatCommanderWFRP4e.each");
+    const cleaningCellar = game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.ReasonExamples.CleaningCellar");
+    const savingPrincess = game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.ReasonExamples.SavingPrincess");
+
+    return [
+      {
+        params: `amount=2${ss} 6${bp} reason=${cleaningCellar}`,
+        label: `2/6 ${each} ${wordFor} "${cleaningCellar}"`,
+      },
+      {
+        params: `amount=1${gc} 10${ss} reason=${savingPrincess} mode=split split=3`,
+        label: `1${gc} ${wordAnd} 10${ss} ${wordFor} "${savingPrincess}", ${splitThree}`,
       }
     ]
   }

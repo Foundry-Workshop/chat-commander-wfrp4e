@@ -462,38 +462,79 @@ export default class ChatCommands {
       description: game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.CreditDescription'),
       closeOnComplete: false,
       autocompleteCallback: (menu, alias, parameters) => {
-        const entries = [];
-        const params = parameters.toLocaleLowerCase().split(" ");
-        const examples = ChatCommandsHelper.amountExamples;
+        const {defaultArg, args, currentArg, currentValue} = ChatCommandsHelper.parseParams("credit", parameters);
+        const unusedArguments = [];
+        let params = ChatCommandsHelper.argsToParameters(args);
 
-        entries.push(...[
-          game.chatCommands.createInfoElement(game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.CreditAmountHint')),
-          game.chatCommands.createInfoElement(game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.CreditPlayerHint')),
-          game.chatCommands.createInfoElement(game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.CreditActorHint')),
-          game.chatCommands.createSeparatorElement(),
-        ]);
+        for (const arg in args) {
+          if (arg === currentArg) continue;
+          if (args[arg] !== null) continue;
+          if (args.mode !== "split" && arg === "split") continue;
 
-        switch (params.length) {
-          case 1:
-            entries.push(...[
-              game.chatCommands.createInfoElement(game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.AmountExample')),
-              game.chatCommands.createInfoElement(examples[0]),
-              game.chatCommands.createInfoElement(examples[1]),
-              game.chatCommands.createInfoElement(examples[2]),
-              game.chatCommands.createSeparatorElement(),
-            ])
+          unusedArguments.push(ChatCommandsHelper.createElement(
+            [alias, params, `${arg}=`],
+            game.i18n.localize(`Forien.ChatCommanderWFRP4e.Commands.Credit.${arg}`),
+          ));
+        }
+
+        params = ChatCommandsHelper.argsToParameters(args, currentArg || defaultArg);
+        const suggestions = [];
+
+        switch (currentArg) {
+          case "":
+          case "amount":
+            const amountExamples = ChatCommandsHelper.amountExamples;
+            suggestions.push(
+              game.chatCommands.createInfoElement(game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.AmountExample")),
+            );
+            for (const example of amountExamples)
+              suggestions.push(ChatCommandsHelper.createElement([alias, params, `${defaultArg}=${example}`], example));
             break;
-          case 2:
-            if ('split'.includes(params[1]))
-              entries.push(game.chatCommands.createCommandElement(`${alias} ${params[0]} split `, game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.Split')));
-            if ('each'.includes(params[1]))
-              entries.push(game.chatCommands.createCommandElement(`${alias} ${params[0]} each `, game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.Each')));
-
-            ChatCommandsHelper.createPlayersAndActorsHint(params, entries, alias);
+          case "mode":
+            suggestions.push(
+              ChatCommandsHelper.createElement([alias, params, `${currentArg}=each`], game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.Each")),
+              ChatCommandsHelper.createElement([alias, params, `${currentArg}=split`], game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.Split")),
+            )
+            break;
+          case "split":
+            if (currentValue !== "") break;
+            const playersOnline = ChatCommandsHelper.onlinePlayers.length;
+            for (let i = 1; i <= playersOnline; i++) {
+              suggestions.push(
+                ChatCommandsHelper.createElement([alias, params, `${currentArg}=${i}`], game.i18n.format("Forien.ChatCommanderWFRP4e.split", {count: i}).capitalize()),
+              );
+            }
+            break;
+          case "reason":
+            const reasonExamples = ChatCommandsHelper.reasonExamples;
+            suggestions.push(
+              game.chatCommands.createInfoElement(game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.ReasonExample")),
+            );
+            for (const example of reasonExamples)
+              suggestions.push(ChatCommandsHelper.createElement([alias, params, `${currentArg}=${example}`], example));
+            break;
+          case "target":
+            suggestions.push(...ChatCommandsHelper.createPlayersAndActorsHint(alias, params, currentArg, currentValue));
             break;
           default:
             return false;
         }
+
+        const entries = [];
+
+        if (currentArg === "") {
+          entries.push(
+            game.chatCommands.createInfoElement(game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.CreditAmountHint')),
+            game.chatCommands.createInfoElement(game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.CreditPlayerHint')),
+            game.chatCommands.createInfoElement(game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.CreditActorHint')),
+            game.chatCommands.createInfoElement(game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.ExampleCommands')),
+          )
+          for (const example of ChatCommandsHelper.creditExamples) {
+            entries.push(ChatCommandsHelper.createElement([alias, example.params], example.label))
+          }
+        }
+
+        this._buildAutocompleteSuggestions(menu, entries, suggestions, unusedArguments);
 
         return entries;
       }

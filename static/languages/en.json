@@ -61,15 +61,25 @@
         "ReasonExamples": {
           "CheapAle": "Cheap Ale",
           "RoomBoard": "Room and Board",
-          "UnfairTax": "Unfair Tax at the Gate"
+          "UnfairTax": "Unfair Tax at the Gate",
+          "CleaningCellar": "Cleaning Cellar",
+          "SavingPrincess": "Saving the Princess"
         },
 
         "CreditDescription": "Handle giving money to the players.",
-        "CreditAmountHint": "Syntax: <span class='parameter'>amount</span> — displays a chat card for all users that allows them to receive a share of money",
-        "CreditPlayerHint": "Syntax: <span class='parameter'>amount</span> <span class='parameter'>player</span> — displays chat card only for specified player",
-        "CreditActorHint": "Syntax: <span class='parameter'>amount</span> <span class='parameter'>actor</span> — automatically awards <code>amount</code> of money to the specified actor",
-        "Each": "Each — every user will be able to receive the specified <code>amount</code>",
-        "Split": "Split — (default) the specified <code>amount</code> will be split between all online users",
+        "CreditAmountHint": "Syntax: <span class='parameter'>&lt;amount&gt;</span> — displays a chat card for all users that allows them to receive a share of money",
+        "CreditPlayerHint": "Syntax: <span class='parameter'>&lt;amount&gt;</span> <span class='parameter'>target=&lt;player&gt;</span> — displays chat card only for specified player",
+        "CreditActorHint": "Syntax: <span class='parameter'>&lt;amount&gt;</span> <span class='parameter'>target=&lt;actor&gt;</span> — automatically awards <code>amount</code> of money to the specified actor",
+        "Each": "Each — (default) every user will be able to receive the specified <code>amount</code>",
+        "Split": "Split — the specified <code>amount</code> will be split between all online users, or into `<code>split</code>` piles.",
+
+        "Credit": {
+          "amount": "<span class='parameter'>amount</span> — an amount of money",
+          "mode": "<span class='parameter'>mode</span> — mode of crediting",
+          "split": "<span class='parameter'>split</span> — split count",
+          "target": "<span class='parameter'>target</span> — target actor or player for the command",
+          "reason": "<span class='parameter'>reason</span> — reason for the credit"
+        },
 
         "CorruptionDescription": "Prompt all the players to roll against Corrupting Influences of specified strength.",
         "CorruptionHint": "Syntax: <span class='parameter'>strength</span>",
@@ -109,7 +119,12 @@
       "NameGen": {
         "Female": "Female",
         "Male": "Male"
-      }
+      },
+
+      "for": "for",
+      "and": "and",
+      "each": "each",
+      "split": "split {count} ways"
     }
   }
 }

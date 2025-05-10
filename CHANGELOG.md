@@ -7,6 +7,7 @@
   * `/name`
   * `/avail`
   * `/pay`
+  * `/credit`
 
 ## v0.1.5
 * Verified for v12.327
