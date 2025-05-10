@@ -10,6 +10,7 @@
   * `/credit`
   * `/corruption`
   * `/fear`
+  * `/terror`
 
 ## v0.1.5
 * Verified for v12.327

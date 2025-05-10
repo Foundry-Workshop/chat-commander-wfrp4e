@@ -681,25 +681,56 @@ export default class ChatCommands {
       description: game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.TerrorDescription'),
       closeOnComplete: false,
       autocompleteCallback: (menu, alias, parameters) => {
-        const params = parameters.toLocaleLowerCase().split(" ");
-        const entries = [];
+        const {defaultArg, args, currentArg, currentValue} = ChatCommandsHelper.parseParams("terror", parameters);
+        const unusedArguments = [];
+        let params = ChatCommandsHelper.argsToParameters(args);
 
-        entries.push(...[
-          game.chatCommands.createInfoElement(game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.TerrorHint')),
-          game.chatCommands.createSeparatorElement(),
-        ]);
+        for (const arg in args) {
+          if (arg === currentArg) continue;
+          if (args[arg] !== null) continue;
 
-        switch (params.length) {
-          case 1:
+          unusedArguments.push(ChatCommandsHelper.createElement(
+            [alias, params, `${arg}=`],
+            game.i18n.localize(`Forien.ChatCommanderWFRP4e.Commands.Terror.${arg}`),
+          ));
+        }
+
+        params = ChatCommandsHelper.argsToParameters(args, currentArg || defaultArg);
+        const suggestions = [];
+
+        switch (currentArg) {
+          case "":
+          case "rating":
+            if (Number(currentValue) > 0) break;
             for (let strength = 1; strength < 6; strength += 1) {
-              entries.push(game.chatCommands.createCommandElement(`${alias} ${strength} `, game.i18n.format('Forien.ChatCommanderWFRP4e.Commands.TerrorStrengthExample', {strength})));
+              suggestions.push(
+                ChatCommandsHelper.createElement(
+                  [alias, params, `${defaultArg}=${strength}`],
+                  game.i18n.format("Forien.ChatCommanderWFRP4e.Commands.TerrorStrengthExample", {strength}),
+                ),
+              );
             }
             break;
-          case 2:
+          case "source":
+            for (const example of ChatCommandsHelper.exampleTerrorSources)
+              suggestions.push(ChatCommandsHelper.createElement([alias, params, `${currentArg}=${example}`], example));
             break;
           default:
             return false;
         }
+
+        const entries = [];
+
+        if (currentArg === "") {
+          entries.push(
+            game.chatCommands.createInfoElement(game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.ExampleCommands')),
+          )
+          for (const example of ChatCommandsHelper.terrorExamples) {
+            entries.push(ChatCommandsHelper.createElement([alias, example.params], example.label))
+          }
+        }
+
+        this._buildAutocompleteSuggestions(menu, entries, suggestions, unusedArguments);
 
         return entries;
       }

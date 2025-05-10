@@ -395,4 +395,46 @@ export default class ChatCommandsHelper {
     ]
   }
   //#endregion
+
+  //#region Terror Helper
+
+  static get exampleTerrorSources() {
+    return [
+      game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.TerrorExamples.Terrifying"),
+      game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.TerrorExamples.Varghulf"),
+      game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.TerrorExamples.SteppedLego"),
+    ]
+  }
+
+  static get terrorExamples() {
+    const sources = ChatCommandsHelper.exampleTerrorSources;
+
+    return [
+      {
+        params: `rating=1 source=${sources[0]}`,
+        label: game.i18n.format("Forien.ChatCommanderWFRP4e.Commands.TerrorExamples.example", {
+            rating: 1,
+            source: sources[0]
+          },
+        ),
+      },
+      {
+        params: `rating=3 source=${sources[1]}`,
+        label: game.i18n.format("Forien.ChatCommanderWFRP4e.Commands.TerrorExamples.example", {
+            rating: 3,
+            source: sources[1]
+          },
+        ),
+      },
+      {
+        params: `rating=6 source=${sources[2]}`,
+        label: game.i18n.format("Forien.ChatCommanderWFRP4e.Commands.TerrorExamples.example", {
+            rating: 6,
+            source: sources[2]
+          },
+        ),
+      },
+    ]
+  }
+  //#endregion
 }

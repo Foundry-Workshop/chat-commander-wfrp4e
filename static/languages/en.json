@@ -119,6 +119,16 @@
         "TerrorDescription": "Prompt players to perform a Terror check",
         "TerrorHint": "Syntax: <span class='parameter'>strength</span> <span class='parameter'>[source]</span>",
         "TerrorStrengthExample": "Example strength: <strong>{strength}</strong>",
+        "Terror": {
+          "rating": "<span class='parameter'>rating</span> — Terror's rating (strength)",
+          "source": "<span class='parameter'>source</span> — source of Terror"
+        },
+        "TerrorExamples": {
+          "Terrifying": "Terrifying Wizard",
+          "Varghulf": "Varghulf",
+          "SteppedLego": "Seeing someone step on a LEGO",
+          "example": "{source} (Terror {rating})"
+        },
 
         "TravelDescription": "Show a distance and travel time between two locations",
         "TravelHint": "Syntax: <span class='parameter'>from</span> <span class='parameter'>to</span>",
