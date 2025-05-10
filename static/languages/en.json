@@ -23,7 +23,10 @@
         "CharGenDescription": "Enter Character Creation.",
 
         "NameGenDescription": "Enter Character Creation.",
-        "NameGenHint": "Syntax: <span class='parameter'>species</span> <span class='parameter'>[gender]</span>",
+        "Name": {
+          "gender": "<span class='parameter'>gender</span> — specify gender for the name",
+          "species": "<span class='parameter'>species</span> — specify species to generate the name for"
+        },
 
         "AvailabilityDescription": "Roll for an item availability based on settlement and rarity.",
         "AvailabilityHint": "Syntax: <span class='parameter'>settlement</span> <span class='parameter'>rarity</span>",

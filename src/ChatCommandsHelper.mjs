@@ -1,8 +1,11 @@
 export default class ChatCommandsHelper {
-  static parseParams(parameters) {
+  static parseParams(command, parameters) {
+    const cmd = game.wfrp4e.commands.commands[command];
+    if (!cmd) return {};
+
     parameters = parameters.trim();
-    const defaultArg = game.wfrp4e.commands.commands.table.defaultArg;
-    const args = ChatCommandsHelper.getArgs("table", parameters);
+    const defaultArg = cmd.defaultArg;
+    const args = ChatCommandsHelper.getArgs(command, parameters);
     const currentArg = ChatCommandsHelper.getCurrentArg(parameters);
     const currentValue = args[currentArg] ?? (parameters.includes("=") ? "" : parameters);
 

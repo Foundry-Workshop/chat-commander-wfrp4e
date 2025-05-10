@@ -97,7 +97,7 @@ export default class ChatCommands {
       description: game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.TableDescription"),
       closeOnComplete: false,
       autocompleteCallback: (menu, alias, parameters) => {
-        const {defaultArg, args, currentArg, currentValue} = ChatCommandsHelper.parseParams(parameters);
+        const {defaultArg, args, currentArg, currentValue} = ChatCommandsHelper.parseParams("table", parameters);
         const unusedArguments = [];
         let params = ChatCommandsHelper.argsToParameters(args);
         let keys;
@@ -125,8 +125,9 @@ export default class ChatCommands {
             }
             break;
           case "column":
-            keys =
-              tables.filter(t => t.key === args.table).map(t => t.column).filter(k => k && k.includes(currentValue));
+            keys = tables.filter(t => t.key === args.table)
+                         .map(t => t.column)
+                         .filter(k => k && k.includes(currentValue));
             if (keys && keys.length) {
               for (const key of keys) {
                 if (key === currentValue) continue;
@@ -227,6 +228,19 @@ export default class ChatCommands {
   }
 
   static registerNameGenCommand() {
+    const SPECIES = [
+      {id: "human", label: game.i18n.localize("Human")},
+      {id: "dwarf", label: game.i18n.localize("Dwarf")},
+      {id: "helf", label: game.i18n.localize("High Elf")},
+      {id: "welf", label: game.i18n.localize("Wood Elf")},
+      {id: "halfling", label: game.i18n.localize("Halfling")},
+    ];
+
+    const GENDERS = [
+      {id: "female", label: game.i18n.localize("Forien.ChatCommanderWFRP4e.NameGen.Female")},
+      {id: "male", label: game.i18n.localize("Forien.ChatCommanderWFRP4e.NameGen.Male")},
+    ];
+
     game.chatCommands.register({
       name: "/name",
       module: "wfrp4e",
@@ -234,33 +248,46 @@ export default class ChatCommands {
       description: game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.NameGenDescription'),
       closeOnComplete: false,
       autocompleteCallback: (menu, alias, parameters) => {
-        const entries = [];
-        const params = parameters.toLocaleLowerCase().split(" ");
+        const {defaultArg, args, currentArg, currentValue} = ChatCommandsHelper.parseParams("name", parameters);
+        const unusedArguments = [];
+        let params = ChatCommandsHelper.argsToParameters(args);
 
-        entries.push(...[
-          game.chatCommands.createInfoElement(game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.NameGenHint')),
-          game.chatCommands.createSeparatorElement(),
-        ]);
+        for (const arg in args) {
+          if (arg === currentArg) continue;
+          if (args[arg] !== null) continue;
 
-        switch (params.length) {
-          case 1:
-            entries.push(...[
-              game.chatCommands.createCommandElement(`${alias} human `, game.i18n.localize('Human')),
-              game.chatCommands.createCommandElement(`${alias} dwarf `, game.i18n.localize('Dwarf')),
-              game.chatCommands.createCommandElement(`${alias} helf `, game.i18n.localize('High Elf')),
-              game.chatCommands.createCommandElement(`${alias} welf `, game.i18n.localize('Wood Elf')),
-              game.chatCommands.createCommandElement(`${alias} halfling `, game.i18n.localize('Halfling'))
-            ]);
+          unusedArguments.push(ChatCommandsHelper.createElement(
+            [alias, params, `${arg}=`],
+            game.i18n.localize(`Forien.ChatCommanderWFRP4e.Commands.Name.${arg}`),
+          ));
+        }
+
+        params = ChatCommandsHelper.argsToParameters(args, currentArg || defaultArg);
+        const suggestions = [];
+
+        switch (currentArg) {
+          case "":
+          case "gender":
+            const genders = GENDERS.filter(g => g.id.includes(currentValue) || g.label.toLowerCase().includes(currentValue.toLowerCase()));
+            for (const gender of genders) {
+              if (gender.id === currentValue) continue;
+              suggestions.push(ChatCommandsHelper.createElement([alias, params, `${defaultArg}=${gender.id}`], gender.label));
+            }
             break;
-          case 2:
-            entries.push(...[
-              game.chatCommands.createCommandElement(`${alias} ${params[0]} female `, game.i18n.localize('Forien.ChatCommanderWFRP4e.NameGen.Female')),
-              game.chatCommands.createCommandElement(`${alias} ${params[0]} male `, game.i18n.localize('Forien.ChatCommanderWFRP4e.NameGen.Male'))
-            ]);
+          case "species":
+            const species = SPECIES.filter(g => g.id.includes(currentValue) || g.label.toLowerCase().includes(currentValue.toLowerCase()));
+            for (const specie of species) {
+              if (specie.id === currentValue) continue;
+              suggestions.push(ChatCommandsHelper.createElement([alias, params, `${currentArg}=${specie.id}`], specie.label));
+            }
             break;
           default:
             return false;
         }
+
+        const entries = [];
+
+        this._buildAutocompleteSuggestions(menu, entries, suggestions, unusedArguments);
 
         return entries;
       }
