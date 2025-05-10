@@ -133,6 +133,10 @@
         "TravelDescription": "Show a distance and travel time between two locations",
         "TravelHint": "Syntax: <span class='parameter'>from</span> <span class='parameter'>to</span>",
         "TravelHelp": "Show all locations as clickable links in chat.",
+        "Travel": {
+          "from": "<span class='parameter'>from</span> — starting location",
+          "to": "<span class='parameter'>to</span> — destination location"
+        },
 
         "ExpDescription": "Post a chat card that lets players receive Experience",
         "ExpHint": "Syntax: <span class='parameter'>experience</span> <span class='parameter'>[reason]</span>",

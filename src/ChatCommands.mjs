@@ -44,7 +44,7 @@ export default class ChatCommands {
     ChatCommands.registerCorruptionCommand();
     ChatCommands.registerFearCommand();
     ChatCommands.registerTerrorCommand();
-    // ChatCommands.registerTravelCommand();
+    ChatCommands.registerTravelCommand();
     ChatCommands.registerEXPCommand();
 
     if (ChatCommands.canTrade) {
@@ -60,6 +60,7 @@ export default class ChatCommands {
     ChatCommands.registerNameGenCommand();
     ChatCommands.registerAvailabilityCommand();
     ChatCommands.registerPlayerPayCommand();
+    ChatCommands.registerTravelCommand();
 
     if (ChatCommands.canTrade) {
       ChatCommands.registerTradeCommand();
@@ -738,7 +739,7 @@ export default class ChatCommands {
   }
 
   static registerTravelCommand() {
-    const travelData = TravelDistanceWfrp4e.travel_data.map(t => {
+    const travelData = TravelDistanceWFRP4e.travel_data.map(t => {
       return {from: t.from.toLowerCase(), to: t.to.toLowerCase()}
     }).filter(t => t.from && t.to);
 
@@ -749,34 +750,48 @@ export default class ChatCommands {
       description: game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.TravelDescription'),
       closeOnComplete: false,
       autocompleteCallback: (menu, alias, parameters) => {
-        const params = parameters.toLocaleLowerCase().split(" ");
-        const entries = [];
+        const {defaultArg, args, currentArg, currentValue} = ChatCommandsHelper.parseParams("travel", parameters);
+        const unusedArguments = [];
+        let params = ChatCommandsHelper.argsToParameters(args);
         let locations;
 
-        entries.push(...[
-          game.chatCommands.createInfoElement(game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.TravelHint')),
-          game.chatCommands.createCommandElement(`/travel`, game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.TravelHelp')),
-          game.chatCommands.createSeparatorElement(),
-        ]);
+        for (const arg in args) {
+          if (arg === currentArg) continue;
+          if (args[arg] !== null) continue;
 
-        switch (params.length) {
-          case 1:
-            locations = travelData.map(t => t.from).filter(Utility.onlyUnique).filter(t => t.includes(params[0]))
+          unusedArguments.push(ChatCommandsHelper.createElement(
+            [alias, params, `${arg}=`],
+            game.i18n.localize(`Forien.ChatCommanderWFRP4e.Commands.Travel.${arg}`),
+          ));
+        }
+
+        params = ChatCommandsHelper.argsToParameters(args, currentArg || defaultArg);
+        const suggestions = [];
+
+        switch (currentArg) {
+          case "":
+          case "from":
+            locations = travelData.map(t => t.from).filter(Utility.onlyUnique).filter(t => t.includes(currentValue))
             for (const location of locations) {
-              entries.push(game.chatCommands.createCommandElement(`${alias} ${location} `, location.capitalize()));
+              if (location === currentValue) continue;
+              suggestions.push(ChatCommandsHelper.createElement([alias, params, `${defaultArg}=${location}`], location.capitalize()));
             }
             break;
-          case 2:
-            locations = travelData.filter(t => t.from === params[0]).map(t => t.to).filter(t => t && t.includes(params[1]))
-            if (locations && locations.length) {
-              for (const location of locations) {
-                entries.push(game.chatCommands.createCommandElement(`${alias} ${params[0]} ${location} `, location.capitalize()));
-              }
+          case "to":
+            locations = travelData.filter(t => t.from === args.from).map(t => t.to).filter(t => t && t.includes(currentValue))
+            if (!locations || locations.length < 1) break;
+            for (const location of locations) {
+              if (location === currentValue) continue;
+              suggestions.push(ChatCommandsHelper.createElement([alias, params, `${currentArg}=${location}`], location.capitalize()));
             }
             break;
           default:
             return false;
         }
+
+        const entries = [];
+
+        this._buildAutocompleteSuggestions(menu, entries, suggestions, unusedArguments);
 
         return entries;
       }
