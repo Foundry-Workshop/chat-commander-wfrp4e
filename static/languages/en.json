@@ -2,10 +2,17 @@
   "Forien": {
     "ChatCommanderWFRP4e": {
       "Commands": {
+        "Arguments": "Available Arguments",
+
         "TableDescription": "Select a system RollTable to roll for",
         "TableHint": "Syntax: <span class='parameter'>key</span> <span class='parameter'>[column]</span> <span class='parameter'>[modifier]</span>",
         "TableHelp": "Show all tables as clickable links in chat.",
         "TableModExample": "Example modifier: <strong>{mod}</strong>",
+        "Table": {
+          "table": "<span class='parameter'>table</span> — key of table to draw from",
+          "column": "<span class='parameter'>column</span> — column to draw from",
+          "modifier": "<span class='parameter'>modifier</span> — modifier to roll"
+        },
 
         "ConditionsDescription": "Post Condition's description to Chat",
         "ConditionsHint": "Syntax: <span class='parameter'>key</span>",

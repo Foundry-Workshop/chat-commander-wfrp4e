@@ -17,8 +17,8 @@
   "bugs": "<<autoreplaced>>",
   "version": "<<autoreplaced>>",
   "compatibility": {
-    "minimum": "11",
-    "verified": "12.327"
+    "minimum": "13",
+    "verified": "13.342"
   },
   "relationships": {
     "systems": [
@@ -27,8 +27,8 @@
         "type": "system",
         "compatibility": [
           {
-            "minimum": "7.0.3",
-            "verified": "7.2.1"
+            "minimum": "9.0.0",
+            "verified": "9.0.4"
           }
         ]
       }
@@ -53,7 +53,7 @@
     }
   ],
   "esmodules": [
-    "./modules/chat-commander-wfrp4e.mjs"
+    "./chat-commander-wfrp4e.mjs"
   ],
   "styles": [
     "./styles/chat-commander-wfrp4e.css"

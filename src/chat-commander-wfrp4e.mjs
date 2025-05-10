@@ -9,7 +9,6 @@ Hooks.once('init', () => {
   registerSettings();
 
   Hooks.callAll(`${constants.moduleId}:afterInit`);
-  // Utility.notify(`${constants.moduleLabel} initialized`, {consoleOnly: true});
 });
 
 Hooks.once('setup', () => {

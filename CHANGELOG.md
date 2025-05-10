@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.0.0
+* Verified for v13.342
+* Updated the following command autocompletion to match the new WFRP4e's named parameters:
+  * `/table`
+
 ## v0.1.5
 * Verified for v12.327
 * Added mention of „Sea of Claws” module in `/trade` command

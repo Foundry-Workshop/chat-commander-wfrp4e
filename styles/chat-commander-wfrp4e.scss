@@ -1,5 +1,11 @@
 #autocomplete-menu {
+  span.parameter {
+    background: #333;
+    padding: 2px 4px;
+  }
+
   #context-menu {
+    max-height: calc(100vh - 150px) !important;
     span {
       &.tag {
         padding: 3px 8px;
@@ -22,22 +28,15 @@
           background-color: #336;
         }
         &.grey {
-          background-color: #888;
+          background-color: #453;
         }
       }
     }
   }
 }
 
-#chat-form textarea {
-  border: 3px double #ffffff00;
-
-  &#chat-message {
-    border: 3px double #3e000078;
-  }
-
+.chat-form textarea {
   &#autocomplete-suggestion {
-    width: calc(100% - 22px);
-    box-sizing: border-box;
+    padding: 14px;
   }
 }

@@ -1,4 +1,48 @@
 export default class ChatCommandsHelper {
+  static parseParams(parameters) {
+    parameters = parameters.trim();
+    const defaultArg = game.wfrp4e.commands.commands.table.defaultArg;
+    const args = ChatCommandsHelper.getArgs("table", parameters);
+    const currentArg = ChatCommandsHelper.getCurrentArg(parameters);
+    const currentValue = args[currentArg] ?? (parameters.includes("=") ? "" : parameters);
+
+    return {defaultArg, args, currentArg, currentValue};
+  }
+
+  static createElement(parts, content) {
+    parts = parts.map(p => p.trim()).filter(p => p.length > 0);
+    return game.chatCommands.createCommandElement(parts.join(" "), content);
+  }
+
+  static argsToParameters(args, except = null) {
+    const parameters = [];
+    for (const key in args) {
+      if (except && key === except) continue;
+      const value = args[key]?.trim() || null;
+      if (!value) continue;
+      parameters.push(`${key}=${value}`);
+    }
+
+    return parameters.join(" ");
+  }
+
+  static getArgs(command, parameters) {
+    const cmd = game.wfrp4e.commands.commands[command];
+    if (!cmd) return {};
+
+    const argValues = game.wfrp4e.commands.parseArgs(command, parameters);
+    const args = {};
+    cmd?.args.forEach((key, index) => args[key] = argValues[index]);
+
+    return args;
+  }
+
+  static getCurrentArg(parameters) {
+    const lastEquals = parameters.lastIndexOf("=");
+    const lastSpace = parameters.lastIndexOf(" ", lastEquals);
+
+    return parameters.substring(lastSpace + 1, lastEquals);
+  }
 
 
   //#region Register Item Properties Command helpers
