@@ -87,6 +87,20 @@
         "CorruptionModerate": "Moderate — failing will award player's characters 2 point of Corruption.",
         "CorruptionMajor": "Major — failing will award player's characters 3 points of Corruption.",
 
+        "Corruption": {
+          "strength": "<span class='parameter'>strength</span> — corruption strength",
+          "skill": "<span class='parameter'>skill</span> — skill to resist",
+          "source": "<span class='parameter'>source</span> — source of corruption"
+        },
+        "CorruptionExamples": {
+          "WitnessedLesserDaemon": "Witnessed a Lesser Daemon",
+          "ExposureToWarpstone": "Prolonged exposure to refined Warpstone",
+          "DealWithDaemon": "Making a deal with a Daemon",
+          "MinorExample": "Minor Exposure because of \"{reason}\", resisted with Cool",
+          "ModerateExample": "Moderate Exposure because of \"{reason}\", resisted with Endurance",
+          "MajorExample": "Major Exposure because of \"{reason}\""
+        },
+
         "FearDescription": "Prompt players to perform a Fear check",
         "FearHint": "Syntax: <span class='parameter'>strength</span> <span class='parameter'>[source]</span>",
         "FearStrengthExample": "Example strength: <strong>{strength}</strong>",

@@ -547,17 +547,62 @@ export default class ChatCommands {
       module: "wfrp4e",
       icon: "<i class='fas fa-viruses'></i>",
       description: game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.CorruptionDescription'),
-      closeOnComplete: true,
-      autocompleteCallback: (_menu, alias) => {
+      closeOnComplete: false,
+      autocompleteCallback: (menu, alias, parameters) => {
+        const {defaultArg, args, currentArg, currentValue} = ChatCommandsHelper.parseParams("corruption", parameters);
+        const unusedArguments = [];
+        let params = ChatCommandsHelper.argsToParameters(args);
+
+        for (const arg in args) {
+          if (arg === currentArg) continue;
+          if (args[arg] !== null) continue;
+
+          unusedArguments.push(ChatCommandsHelper.createElement(
+            [alias, params, `${arg}=`],
+            game.i18n.localize(`Forien.ChatCommanderWFRP4e.Commands.Corruption.${arg}`),
+          ));
+        }
+
+        params = ChatCommandsHelper.argsToParameters(args, currentArg || defaultArg);
+        const suggestions = [];
+
+        switch (currentArg) {
+          case "":
+          case "strength":
+            const strengths = Object.keys(ChatCommandsHelper.corruption);
+            if (strengths.includes(currentValue)) break;
+            for (const [key, label] of Object.entries(ChatCommandsHelper.corruption))
+              suggestions.push(ChatCommandsHelper.createElement([alias, params, `${defaultArg}=${key}`], label));
+            break;
+          case "skill":
+            if (currentValue !== "") break;
+            const skills = [
+              game.i18n.localize("NAME.Endurance"),
+              game.i18n.localize("NAME.Cool"),
+            ];
+            for (const skill of skills)
+              suggestions.push(ChatCommandsHelper.createElement([alias, params, `${currentArg}=${skill}`], skill))
+            break;
+          case "source":
+            for (const example of ChatCommandsHelper.exampleCorruptionSources)
+              suggestions.push(ChatCommandsHelper.createElement([alias, params, `${currentArg}=${example}`], example));
+            break;
+          default:
+            return false;
+        }
+
         const entries = [];
 
-        entries.push(...[
-          game.chatCommands.createInfoElement(game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.CorruptionHint')),
-          game.chatCommands.createSeparatorElement(),
-          game.chatCommands.createCommandElement(`${alias} minor`, game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.CorruptionMinor')),
-          game.chatCommands.createCommandElement(`${alias} moderate`, game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.CorruptionModerate')),
-          game.chatCommands.createCommandElement(`${alias} major`, game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.CorruptionMajor')),
-        ]);
+        if (currentArg === "") {
+          entries.push(
+            game.chatCommands.createInfoElement(game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.ExampleCommands')),
+          )
+          for (const example of ChatCommandsHelper.corruptionExamples) {
+            entries.push(ChatCommandsHelper.createElement([alias, example.params], example.label))
+          }
+        }
+
+        this._buildAutocompleteSuggestions(menu, entries, suggestions, unusedArguments);
 
         return entries;
       }

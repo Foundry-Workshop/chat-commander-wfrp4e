@@ -8,6 +8,7 @@
   * `/avail`
   * `/pay`
   * `/credit`
+  * `/corruption`
 
 ## v0.1.5
 * Verified for v12.327

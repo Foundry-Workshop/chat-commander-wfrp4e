@@ -313,4 +313,44 @@ export default class ChatCommandsHelper {
 
     return entries;
   }
+
+  //#region Corruption Helper
+
+  static get corruption() {
+    return {
+      minor: game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.CorruptionMinor'),
+      moderate: game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.CorruptionModerate'),
+      major: game.i18n.localize('Forien.ChatCommanderWFRP4e.Commands.CorruptionMajor'),
+    }
+  }
+
+  static get exampleCorruptionSources() {
+    return [
+      game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.CorruptionExamples.WitnessedLesserDaemon"),
+      game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.CorruptionExamples.ExposureToWarpstone"),
+      game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.CorruptionExamples.DealWithDaemon"),
+    ]
+  }
+
+  static get corruptionExamples() {
+    const sources = ChatCommandsHelper.exampleCorruptionSources;
+    const cool = game.i18n.localize("NAME.Cool");
+    const endurance = game.i18n.localize("NAME.Endurance");
+
+    return [
+      {
+        params: `strength=minor skill=${cool} reason=${sources[0]}`,
+        label: game.i18n.format("Forien.ChatCommanderWFRP4e.Commands.CorruptionExamples.MinorExample", {reason: sources[0]}),
+      },
+      {
+        params: `strength=moderate skill=${endurance} reason=${sources[1]}`,
+        label: game.i18n.format("Forien.ChatCommanderWFRP4e.Commands.CorruptionExamples.ModerateExample", {reason: sources[1]}),
+      },
+      {
+        params: `strength=major reason=${sources[2]}`,
+        label: game.i18n.format("Forien.ChatCommanderWFRP4e.Commands.CorruptionExamples.MajorExample", {reason: sources[2]}),
+      }
+    ]
+  }
+  //#endregion
 }
