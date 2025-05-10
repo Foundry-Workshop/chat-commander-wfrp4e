@@ -77,7 +77,7 @@ jobs:
         with:
           tag: ${{ github.ref }}
           name: Release ${{steps.get_version.outputs.version}}
-          artifacts: './dist/module.json, ./dist/module.zip'
+          artifacts: './dist/module.json, ${{steps.systemID.outputs.prop}}.zip'
           allowUpdates: true
           token: ${{ secrets.GITHUB_TOKEN }}
           draft: true
