@@ -104,6 +104,17 @@
         "FearDescription": "Prompt players to perform a Fear check",
         "FearHint": "Syntax: <span class='parameter'>strength</span> <span class='parameter'>[source]</span>",
         "FearStrengthExample": "Example strength: <strong>{strength}</strong>",
+        "Fear": {
+          "rating": "<span class='parameter'>rating</span> — Fear's rating (strength)",
+          "source": "<span class='parameter'>source</span> — source of Fear"
+        },
+        "FearExamples": {
+          "Paranoia": "Unexplained Paranoia",
+          "Skeleton": "Skeleton",
+          "CloseMorsslieb": "Morrslieb Too Close!",
+          "example": "{source} (Fear {rating})"
+        },
+
 
         "TerrorDescription": "Prompt players to perform a Terror check",
         "TerrorHint": "Syntax: <span class='parameter'>strength</span> <span class='parameter'>[source]</span>",

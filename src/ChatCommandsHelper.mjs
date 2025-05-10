@@ -353,4 +353,46 @@ export default class ChatCommandsHelper {
     ]
   }
   //#endregion
+
+  //#region Fear Helper
+
+  static get exampleFearSources() {
+    return [
+      game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.FearExamples.Paranoia"),
+      game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.FearExamples.Skeleton"),
+      game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.FearExamples.CloseMorsslieb"),
+    ]
+  }
+
+  static get fearExamples() {
+    const sources = ChatCommandsHelper.exampleFearSources;
+
+    return [
+      {
+        params: `rating=1 source=${sources[0]}`,
+        label: game.i18n.format("Forien.ChatCommanderWFRP4e.Commands.FearExamples.example", {
+            rating: 1,
+            source: sources[0]
+          },
+        ),
+      },
+      {
+        params: `rating=2 source=${sources[1]}`,
+        label: game.i18n.format("Forien.ChatCommanderWFRP4e.Commands.FearExamples.example", {
+            rating: 2,
+            source: sources[1]
+          },
+        ),
+      },
+      {
+        params: `rating=4 source=${sources[2]}`,
+        label: game.i18n.format("Forien.ChatCommanderWFRP4e.Commands.FearExamples.example", {
+            rating: 4,
+            source: sources[2]
+          },
+        ),
+      },
+    ]
+  }
+  //#endregion
 }
