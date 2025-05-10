@@ -3,14 +3,21 @@
     "ChatCommanderWFRP4e": {
       "Commands": {
         "Arguments": "Available Arguments",
+        "ExampleCommands": "Example commands:",
 
         "TableDescription": "Select a system RollTable to roll for",
-        "TableHelp": "Show all tables as clickable links in chat.",
+        "TableHelp": "Help: Show all tables as clickable links in chat.",
         "TableModExample": "Example modifier: <strong>{mod}</strong>",
         "Table": {
           "table": "<span class='parameter'>table</span> — key of table to draw from",
           "column": "<span class='parameter'>column</span> — column to draw from",
           "modifier": "<span class='parameter'>modifier</span> — modifier to roll"
+        },
+        "TableExamples": {
+          "Wrath": "Wrath of the Gods",
+          "WelfCareer": "Career – Wood Elf",
+          "CritBody35": "Critical Wound – Body, Modifier +35",
+          "JobWho": "I Need A Job! – Who, Modifier -10"
         },
 
         "ConditionsDescription": "Post Condition's description to Chat",
@@ -28,7 +35,7 @@
         },
 
         "AvailabilityDescription": "Roll for an item availability based on settlement and rarity.",
-        "AvailabilityHelp": "Show help for the Availability Test in chat.",
+        "AvailabilityHelp": "Help: Show help for the Availability Test in chat.",
         "Availability": {
           "rarity":"<span class='parameter'>rarity</span> — rarity of the item",
           "size": "<span class='parameter'>size</span> — size of the settlement",
@@ -43,6 +50,19 @@
         "GMPayAmountHint": "Syntax: <span class='parameter'>amount</span> — displays \"Pay\" chat card for all users",
         "GMPayPlayerHint": "Syntax: <span class='parameter'>amount</span> <span class='parameter'>player</span> — displays \"Pay\" chat card only for specified player",
         "GMPayActorHint": "Syntax: <span class='parameter'>amount</span> <span class='parameter'>actor</span> — automatically deducts <code>amount</code> from specified actor",
+
+        "Pay": {
+          "amount": "<span class='parameter'>amount</span> — an amount of money",
+          "for": "<span class='parameter'>for</span> — reason for payment",
+          "target": "<span class='parameter'>target</span> — target actor or player for the command"
+        },
+
+        "ReasonExample": "Example reasons:",
+        "ReasonExamples": {
+          "CheapAle": "Cheap Ale",
+          "RoomBoard": "Room and Board",
+          "UnfairTax": "Unfair Tax at the Gate"
+        },
 
         "CreditDescription": "Handle giving money to the players.",
         "CreditAmountHint": "Syntax: <span class='parameter'>amount</span> — displays a chat card for all users that allows them to receive a share of money",

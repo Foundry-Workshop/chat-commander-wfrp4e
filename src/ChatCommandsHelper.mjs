@@ -187,6 +187,30 @@ export default class ChatCommandsHelper {
 
   //#endregion
 
+  //#region table Command helpers
+
+  static get tableExamples() {
+    return [
+      {
+        params: `table=wrath`,
+        label: game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.TableExamples.Wrath"),
+      },
+      {
+        params: `table=career column=welf`,
+        label: game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.TableExamples.WelfCareer"),
+      },
+      {
+        params: `table=critbody modifier=35`,
+        label: game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.TableExamples.CritBody35"),
+      },
+      {
+        params: `table=job column=Who modifier=-10`,
+        label: game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.TableExamples.JobWho"),
+      }
+    ]
+  }
+  //#endregion
+
 
   //#region Pay Command helpers
 
@@ -195,7 +219,40 @@ export default class ChatCommandsHelper {
     const ss = game.i18n.localize("MARKET.Abbrev.SS").toLowerCase();
     const bp = game.i18n.localize("MARKET.Abbrev.BP").toLowerCase();
 
-    return [`10${gc}3${ss}7${bp}`, `3${gc}2${bp}`, `10${bp}350${ss}`];
+    return [`10${gc}3${ss} 7${bp}`, `3${gc} 2${bp}`, `10${bp}350${ss}`];
+  }
+
+  static get reasonExamples() {
+    return [
+      game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.ReasonExamples.CheapAle"),
+      game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.ReasonExamples.RoomBoard"),
+      game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.ReasonExamples.UnfairTax"),
+    ];
+  }
+
+  static get payExamples() {
+    const gc = game.i18n.localize("MARKET.Abbrev.GC").toLowerCase();
+    const ss = game.i18n.localize("MARKET.Abbrev.SS").toLowerCase();
+    const bp = game.i18n.localize("MARKET.Abbrev.BP").toLowerCase();
+
+    const cheapAle = game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.ReasonExamples.CheapAle");
+    const roomBoard = game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.ReasonExamples.RoomBoard");
+    const unfairTax = game.i18n.localize("Forien.ChatCommanderWFRP4e.Commands.ReasonExamples.UnfairTax");
+
+    return [
+      {
+        params: `amount=3${bp} for=${cheapAle}`,
+        label: `3${bp} for "${cheapAle}"`,
+      },
+      {
+        params: `amount=2${ss} 6${bp} for=${roomBoard}`,
+        label: `2${ss} and 6${bp} for "${roomBoard}"`,
+      },
+      {
+        params: `amount=10${gc} 15${ss} 8${bp} for=${unfairTax}`,
+        label: `10${gc} 15/8 for "${unfairTax}"`,
+      }
+    ]
   }
 
   static get onlinePlayers() {
@@ -216,11 +273,17 @@ export default class ChatCommandsHelper {
 
   //#endregion
 
-  static createPlayersAndActorsHint(params, entries, alias) {
+  static createPlayersAndActorsHint(alias, params, currentArg, currentValue) {
+    const entries = [];
     const hints = [...ChatCommandsHelper.onlinePlayers, ...ChatCommandsHelper.actors];
-    for (const hint of hints.filter(h => h.name.toLowerCase().includes(params[1]))) {
-      let tag = hint instanceof Actor ? ChatCommandsHelper.actorTag : ChatCommandsHelper.userTag;
-      entries.push(game.chatCommands.createCommandElement(`${alias} ${params[0]} ${hint.name.toLowerCase()} `, `${hint.name} — ${ChatCommandsHelper.parseTagToHTML(tag)}`));
+    for (const hint of hints.filter(h => h.name.toLowerCase().includes(currentValue))) {
+      const tag = hint instanceof Actor ? ChatCommandsHelper.actorTag : ChatCommandsHelper.userTag;
+      entries.push(ChatCommandsHelper.createElement(
+        [alias, params, `${currentArg}=${hint.name.toLowerCase()}`],
+        `${hint.name} — ${ChatCommandsHelper.parseTagToHTML(tag)}`,
+      ));
     }
+
+    return entries;
   }
 }
