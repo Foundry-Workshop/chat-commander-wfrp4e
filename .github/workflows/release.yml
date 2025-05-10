@@ -77,10 +77,9 @@ jobs:
         with:
           tag: ${{ github.ref }}
           name: Release ${{steps.get_version.outputs.version}}
-          artifacts: './dist/module.json, ${{steps.systemID.outputs.prop}}.zip'
+          artifacts: './dist/module.json, ${{steps.moduleID.outputs.prop}}.zip'
           allowUpdates: true
           token: ${{ secrets.GITHUB_TOKEN }}
-          draft: true
           generateReleaseNotes: true
 
       - name: Foundry Release API
