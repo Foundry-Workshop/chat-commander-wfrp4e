@@ -1,7 +1,9 @@
-import {constants} from './constants.mjs';
-import registerSettings from './settings.mjs';
-import Utility from './utility/Utility.mjs';
-import ChatCommands from "./ChatCommands.mjs";
+import "../styles/chat-commander-wfrp4e.scss";
+
+import {constants}      from 'constants.mjs';
+import registerSettings from 'settings.mjs';
+import Utility          from 'utility/Utility.mjs';
+import ChatCommands     from "ChatCommands.mjs";
 
 Hooks.once('init', () => {
   registerSettings();

@@ -1,6 +1,6 @@
-import Utility from "./utility/Utility.mjs";
-import ChatCommandsHelper from "./ChatCommandsHelper.mjs";
-import {constants} from "./constants.mjs";
+import Utility            from "utility/Utility.mjs";
+import ChatCommandsHelper from "ChatCommandsHelper.mjs";
+import {constants}        from "constants.mjs";
 
 export default class ChatCommands {
   static register() {
